@@ -1,0 +1,22 @@
+{
+  "name": "meetups-rest-api",
+  "version": "1.0.0",
+  "description": "REST-ful API on Express.js + PostgreSQL + Prisma. JWT Auth implemented and built in Docker container",
+  "keywords": [],
+  "author": "Sergey Kachaliuk",
+  "license": "ISC",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
+
