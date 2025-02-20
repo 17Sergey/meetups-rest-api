@@ -10,17 +10,19 @@
     "build": "tspc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./dist/server.js",
-    "dev": "nodemon"
+    "dev": "npm run generate && nodemon",
+    "generate": "npx prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "^6.4.0",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "pg": "^8.13.3"
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.4",
     "nodemon": "^3.1.9",
+    "prisma": "^6.4.0",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.3.0",
     "tsconfig-paths": "^4.2.0",
