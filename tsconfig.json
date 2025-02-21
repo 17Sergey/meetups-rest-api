@@ -10,7 +10,7 @@
     "baseUrl": "./",
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
-      "@models/*": ["./src/models/*"],
+      "@middleware/*": ["./src/middleware/*"],
       "@routes/*": ["./src/routes/*"],
       "@db/*": ["./src/db/*"],
       "@utils/*": ["./src/utils/*"],
