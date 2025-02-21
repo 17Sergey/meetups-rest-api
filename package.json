@@ -8,7 +8,7 @@
   "main": "./dist/server.js",
   "scripts": {
     "build": "tspc",
-    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\" --ignore-path .prettierignore",
+    "format": "prettier --write . --ignore-path .prettierignore",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./dist/server.js",
     "dev": "npm run generate && nodemon",
