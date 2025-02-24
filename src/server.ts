@@ -7,12 +7,11 @@ import { PrismaClient } from "@prisma/client";
 import authRoutes from "@routes/authRoutes";
 import meetupRoutes from "@routes/meetupRoutes";
 import userRoutes from "@routes/userRoutes";
+import { authRoute, meetupsRoute, usersRoute } from "@routes/constants";
 
 dotenv.config();
 
 const app = express();
-
-export const prisma = new PrismaClient();
 
 /* Middleware */
 app.use(express.json({ limit: "5mb" })); // limit is for uplodaing images on the client
@@ -21,13 +20,19 @@ app.use(cookieParser());
 app.use(cors());
 
 /* Routes */
-app.use("/v1/auth", authRoutes);
-app.use("/v1/meetups", meetupRoutes);
-app.use("/v1/users", userRoutes);
+app.use(authRoute, authRoutes);
+app.use(meetupsRoute, meetupRoutes);
+app.use(usersRoute, userRoutes);
 
 app.get("/", (_, res) => {
   res.json({
     message: "Express + TypeScript Server",
+  });
+});
+
+app.get("*", (_, res) => {
+  res.json({
+    message: "Unkonwn url",
   });
 });
 
