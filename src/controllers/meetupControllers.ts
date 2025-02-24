@@ -1,5 +1,5 @@
+import { prisma } from "@db/prismaClient";
 import { Request, Response } from "express";
-import { prisma } from "src/server";
 
 export const getAllMeetups = async (req: Request, res: Response) => {
   try {
