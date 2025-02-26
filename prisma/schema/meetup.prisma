@@ -4,8 +4,6 @@ model Meetup {
   description String
   dateTime    DateTime
   location    String
-  organizers  MeetupOrganizer[]
-  participants MeetupParticipant[]
   tags        MeetupTag[]
 }
 
@@ -13,24 +11,6 @@ model Tag {
   id    Int        @id @default(autoincrement())
   name  String     @unique
   meetups MeetupTag[]
-}
-
-model MeetupOrganizer {
-  meetupId Int
-  userId   Int
-  meetup   Meetup @relation(fields: [meetupId], references: [id])
-  user     User   @relation(fields: [userId], references: [id])
-
-  @@id([meetupId, userId])
-}
-
-model MeetupParticipant {
-  meetupId Int
-  userId   Int
-  meetup   Meetup @relation(fields: [meetupId], references: [id])
-  user     User   @relation(fields: [userId], references: [id])
-
-  @@id([meetupId, userId])
 }
 
 model MeetupTag {

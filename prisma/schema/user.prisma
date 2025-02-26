@@ -6,8 +6,6 @@ model User {
   roleId      Int
   role        UserRole           @relation(fields: [roleId], references: [id])
   refreshTokens RefreshToken[]
-  organizedMeetups MeetupOrganizer[]
-  participatedMeetups MeetupParticipant[]
 }
 
 model UserRole {
