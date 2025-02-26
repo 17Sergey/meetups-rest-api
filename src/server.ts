@@ -2,15 +2,22 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { PrismaClient } from "@prisma/client";
-
 import authRoutes from "@routes/authRoutes";
 import meetupRoutes from "@routes/meetupRoutes";
 import userRoutes from "@routes/userRoutes";
-import { authRoute, meetupsRoute, usersRoute } from "@routes/constants";
+import {
+  authRoute,
+  docsRoute,
+  meetupsRoute,
+  usersRoute,
+} from "@routes/constants";
+import { swaggerUiConfig } from "@utils/swagger";
+import { connectToDb } from "@db/connectToDb";
 
+/* Env */
 dotenv.config();
 
+/* App */
 const app = express();
 
 /* Middleware */
@@ -24,6 +31,9 @@ app.use(authRoute, authRoutes);
 app.use(meetupsRoute, meetupRoutes);
 app.use(usersRoute, userRoutes);
 
+/* Swagger route */
+app.use(docsRoute, swaggerUiConfig.serve, swaggerUiConfig.setup);
+
 app.get("/", (_, res) => {
   res.json({
     message: "Express + TypeScript Server",
@@ -36,8 +46,10 @@ app.get("*", (_, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+export const PORT = process.env.PORT || 5000;
+export const HOST = process.env.HOST || "localhost";
 
 app.listen(PORT, () => {
   console.log(`[server]: Server is running at http://localhost:${PORT}`);
+  connectToDb();
 });
