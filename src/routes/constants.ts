@@ -7,24 +7,28 @@ export const ROUTES = {
   AUTH: "/auth",
   MEETUPS: "/meetups",
   USERS: "/users",
+  API_DOCS: "/api-docs",
 };
 
 export const routesHelpers = {
-  getAuthRoute(version = VERSIONS.V1) {
-    return this.buildVersionRoute(version, ROUTES.AUTH);
-  },
-  getMeetupsRoute(version = VERSIONS.V1) {
-    return this.buildVersionRoute(version, ROUTES.MEETUPS);
-  },
-  getUsersRoute(version = VERSIONS.V1) {
-    return this.buildVersionRoute(version, ROUTES.USERS);
-  },
-
   buildVersionRoute(version: string, route: string) {
     return `${version}${route}`;
   },
 };
 
-export const authRoute = routesHelpers.getAuthRoute();
-export const meetupsRoute = routesHelpers.getMeetupsRoute();
-export const usersRoute = routesHelpers.getUsersRoute();
+export const authRoute = routesHelpers.buildVersionRoute(
+  VERSIONS.V1,
+  ROUTES.AUTH,
+);
+export const meetupsRoute = routesHelpers.buildVersionRoute(
+  VERSIONS.V1,
+  ROUTES.MEETUPS,
+);
+export const usersRoute = routesHelpers.buildVersionRoute(
+  VERSIONS.V1,
+  ROUTES.USERS,
+);
+export const docsRoute = routesHelpers.buildVersionRoute(
+  VERSIONS.V1,
+  ROUTES.API_DOCS,
+);
