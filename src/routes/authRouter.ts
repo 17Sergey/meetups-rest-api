@@ -1,5 +1,5 @@
 import express from "express";
-import { protectRoute } from "../middleware/protectRoute";
+import { protectRoute } from "@middleware/protectRoute";
 import { getMe } from "@controllers/auth/getMe";
 import { signup } from "@controllers/auth/signup";
 import { login } from "@controllers/auth/login";
