@@ -2,16 +2,17 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import authRoutes from "@routes/authRoutes";
-import meetupRoutes from "@routes/meetupRoutes";
-import userRoutes from "@routes/userRoutes";
+import authRouter from "@routes/authRouter";
+import meetupRouter from "@routes/meetupRouter";
+import userRouter from "@routes/userRouter";
+
 import {
   authRoute,
   docsRoute,
   meetupsRoute,
   usersRoute,
 } from "@routes/constants";
-import { swaggerUiConfig } from "@utils/swagger";
+import { swaggerUiConfig } from "src/configs/swagger";
 import { connectToDb } from "@db/connectToDb";
 
 /* Env */
@@ -27,9 +28,9 @@ app.use(cookieParser());
 app.use(cors());
 
 /* Routes */
-app.use(authRoute, authRoutes);
-app.use(meetupsRoute, meetupRoutes);
-app.use(usersRoute, userRoutes);
+app.use(authRoute, authRouter);
+app.use(meetupsRoute, meetupRouter);
+app.use(usersRoute, userRouter);
 
 /* Swagger route */
 app.use(docsRoute, swaggerUiConfig.serve, swaggerUiConfig.setup);
