@@ -17,8 +17,31 @@ import { meetupRepository } from "src/repositories/MeetupRepository";
 
 export const getAllMeetups = async (req: Request, res: Response) => {
   try {
-    const meetups = await meetupRepository.getAll();
-    res.json(meetups);
+    // TODO: validate
+    const {
+      title,
+      sortField,
+      sortOrder,
+      page: queryPage,
+      queryLimit,
+    } = req.query;
+
+    const filters = {
+      title: title || undefined,
+    };
+
+    const sort = {
+      field: sortField,
+      order: sortOrder || "asc",
+    };
+
+    const page = Number(queryPage) || 1;
+    const limit = Number(queryLimit) || 10;
+
+    const meetups = await meetupRepository.getAll(filters, sort, page, limit);
+
+    const totalPages = Math.ceil(meetups.length / limit);
+    res.json({ meetups, totalPages });
   } catch (error) {
     const errorMessage = errorHeplers.getMessageFromUnkownError(error);
     res
@@ -26,44 +49,3 @@ export const getAllMeetups = async (req: Request, res: Response) => {
       .json({ error: `Error in getAllMeetups controller: ${errorMessage}` });
   }
 };
-
-// export const getAllMeetups = async (req: Request, res: Response) => {
-//   try {
-//     const { page = 1, limit = 10, search } = req.query;
-
-//     const pageNum = parseInt(page as string, 10);
-//     const limitNum = parseInt(limit as string, 10);
-
-//     const skip = (pageNum - 1) * limitNum;
-
-//     const where = search
-//       ? {
-//           OR: [
-//             { title: { contains: search as string, mode: "insensitive" } },
-//             {
-//               description: { contains: search as string, mode: "insensitive" },
-//             },
-//           ],
-//         }
-//       : {};
-
-//     const meetups = await prismaClient.meetup.findMany({
-//       // @ts-ignore: TODO: fix types for where
-//       where,
-//       skip,
-//       take: limitNum,
-//     });
-
-//     // @ts-ignore: TODO: fix types for where
-//     const totalMeetups = await prisma.meetup.count({ where });
-
-//     res.json({
-//       meetups,
-//       total: totalMeetups,
-//       page: pageNum,
-//       totalPages: Math.ceil(totalMeetups / limitNum),
-//     });
-//   } catch (error) {
-//     res.status(500).json({ error: "Ошибка получения митапов" });
-//   }
-// };

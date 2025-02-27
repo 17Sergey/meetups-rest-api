@@ -12,8 +12,22 @@ class MeetupRepository extends Repository {
     super(prismaClient);
   }
 
-  async getAll(): Promise<Meetup[]> {
-    return await this.prismaClient.meetup.findMany({});
+  async getAll(
+    filters?: any,
+    sort?: any,
+    page?: number,
+    limit?: number,
+  ): Promise<Meetup[]> {
+    const where = filters ? this.buildWhereClause(filters) : {};
+    const orderBy = sort ? this.buildSortClause(sort) : {};
+    const skip = page && limit ? (page - 1) * limit : 0;
+
+    return await this.prismaClient.meetup.findMany({
+      where,
+      orderBy,
+      skip,
+      take: limit,
+    });
   }
 
   async getById(id: number): Promise<Meetup | null> {
@@ -51,6 +65,23 @@ class MeetupRepository extends Repository {
     await this.prismaClient.meetup.delete({
       where: { id },
     });
+  }
+
+  private buildWhereClause(filters: any) {
+    const where = {};
+    if (filters.title) {
+      //@ts-ignore
+      where.title = { contains: filters.title, mode: "insensitive" };
+    }
+    return where;
+  }
+
+  private buildSortClause(sort: any) {
+    const orderBy = [];
+    if (sort.field) {
+      orderBy.push({ [sort.field]: sort.order || "asc" });
+    }
+    return orderBy;
   }
 }
 
