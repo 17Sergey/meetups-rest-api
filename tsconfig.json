@@ -10,11 +10,14 @@
     "baseUrl": "./",
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
-      "@middleware/*": ["./src/middleware/*"],
-      "@routes/*": ["./src/routes/*"],
+      "@configs/*": ["./src/configs/*"],
       "@db/*": ["./src/db/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@services/*": ["./src/services/*"]
+      "@middleware/*": ["./src/middleware/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@services/*": ["./src/services/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@types/*": ["./src/types/*"],
+      "@utils/*": ["./src/utils/*"]
     },
     "outDir": "./dist",
     "plugins": [{ "transform": "typescript-transform-paths" }]
