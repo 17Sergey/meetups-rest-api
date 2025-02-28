@@ -1,4 +1,5 @@
 import prismaClient from "@db/prismaClient";
+import { UserRole } from "@prisma/client";
 
 class UserRoleRepository {
   async getAll() {
@@ -13,7 +14,7 @@ class UserRoleRepository {
     return item || null;
   }
 
-  async create(data: any) {
+  async create(data: Omit<UserRole, "id">) {
     const newItem = await prismaClient.userRole.create({
       data,
     });
@@ -21,7 +22,7 @@ class UserRoleRepository {
     return newItem;
   }
 
-  async update(id: number, data: any) {
+  async update(id: number, data: Omit<UserRole, "id">) {
     await prismaClient.userRole.update({
       where: { id },
       data,
