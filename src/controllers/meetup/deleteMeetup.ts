@@ -23,15 +23,9 @@ import { meetupRepository } from "src/repositories/MeetupRepository";
  *         description: Internal server error
  */
 export const deleteMeetup = async (req: Request, res: Response) => {
-  const { id: idString } = req.params;
-  const id = Number(idString);
+  const id = req.id as number;
 
   try {
-    // TODO: middleware
-    if (isNaN(id)) {
-      res.status(400).json({ error: "Неверный формат id" });
-    }
-
     const meetup = await meetupRepository.getById(id);
 
     if (!meetup) {

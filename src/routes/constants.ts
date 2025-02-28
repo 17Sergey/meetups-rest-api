@@ -6,7 +6,6 @@ export const ROUTES = {
   VERSIONS,
   AUTH: "/auth",
   MEETUPS: "/meetups",
-  USERS: "/users",
   API_DOCS: "/api-docs",
 };
 
@@ -23,10 +22,6 @@ export const authRoute = routesHelpers.buildVersionRoute(
 export const meetupsRoute = routesHelpers.buildVersionRoute(
   VERSIONS.V1,
   ROUTES.MEETUPS,
-);
-export const usersRoute = routesHelpers.buildVersionRoute(
-  VERSIONS.V1,
-  ROUTES.USERS,
 );
 export const docsRoute = routesHelpers.buildVersionRoute(
   VERSIONS.V1,

@@ -5,7 +5,7 @@ model User {
   password    String
   roleId      Int
   role        UserRole           @relation(fields: [roleId], references: [id])
-  refreshTokens RefreshToken[]
+  refreshToken RefreshToken?
 }
 
 model UserRole {
@@ -16,7 +16,7 @@ model UserRole {
 
 model RefreshToken {
   id          Int      @id @default(autoincrement())
-  userId      Int
+  userId      Int      @unique
   refreshToken String
   createdAt   DateTime @default(now())
   expiresAt   DateTime

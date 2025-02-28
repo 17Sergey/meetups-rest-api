@@ -9,7 +9,7 @@ export const passwordHelpers = {
     return passwordHash;
   },
 
-  async comparePassword(password: string, hashedPassword: string) {
-    return await bcrypt.compare(password, hashedPassword);
+  async comparePassword(password: string, userPassword: string) {
+    return await bcrypt.compare(password, userPassword);
   },
 };

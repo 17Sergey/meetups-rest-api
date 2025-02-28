@@ -1,7 +1,7 @@
 import prismaClient from "@db/prismaClient";
-import { updateMeetupSchema } from "@utils/dto/meetup";
+import { meetupRepository } from "@repositories/MeetupRepository";
+import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
-import z from "zod";
 
 /**
  * @swagger
@@ -42,25 +42,14 @@ import z from "zod";
  */
 export const updateMeetup = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const validatedData = updateMeetupSchema.parse(req.body);
-  const { title, description, dateTime, location } = validatedData;
+  const data = req.body;
 
   try {
-    const updatedMeetup = await prismaClient.meetup.update({
-      where: { id: Number(id) },
-      data: {
-        title,
-        description,
-        dateTime: dateTime ? new Date(dateTime) : undefined,
-        location,
-      },
-    });
+    const updatedMeetup = await meetupRepository.update(Number(id), data);
     res.json(updatedMeetup);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      res.status(400).json({ error: error.errors[0].message });
-    } else {
-      res.status(500).json({ error: "Ошибка обновления митапа" });
-    }
+    res.status(500).json({
+      error: `Error updating meetup: ${errorHeplers.getMessageFromUnkownError(error)}`,
+    });
   }
 };

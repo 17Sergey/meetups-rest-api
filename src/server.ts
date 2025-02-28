@@ -4,14 +4,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRouter from "@routes/authRouter";
 import meetupRouter from "@routes/meetupRouter";
-import userRouter from "@routes/userRouter";
 
-import {
-  authRoute,
-  docsRoute,
-  meetupsRoute,
-  usersRoute,
-} from "@routes/constants";
+import { authRoute, docsRoute, meetupsRoute } from "@routes/constants";
 import { swaggerUiConfig } from "src/configs/swagger";
 import { connectToDb } from "@db/connectToDb";
 
@@ -30,7 +24,6 @@ app.use(cors());
 /* Routes */
 app.use(authRoute, authRouter);
 app.use(meetupsRoute, meetupRouter);
-app.use(usersRoute, userRouter);
 
 /* Swagger route */
 app.use(docsRoute, swaggerUiConfig.serve, swaggerUiConfig.setup);

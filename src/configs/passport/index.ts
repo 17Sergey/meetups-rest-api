@@ -1,13 +1,17 @@
 import { ExtractJwt, Strategy, VerifiedCallback } from "passport-jwt";
 import passport from "passport";
 import { userRepository } from "@repositories/UserRepository";
+import { User } from "@prisma/client";
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET || "",
+  secretOrKey: process.env.ACCESS_TOKEN_SECRET || "",
 };
 
-const jwtVerify = async (jwt_payload: any, done: VerifiedCallback) => {
+const jwtVerify = async (
+  jwt_payload: Pick<User, "id">,
+  done: VerifiedCallback,
+) => {
   try {
     const user = await userRepository.getById(jwt_payload.id);
 

@@ -1,7 +1,6 @@
-import { createMeetupSchema } from "@utils/dto/meetup";
+import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
 import { meetupRepository } from "src/repositories/MeetupRepository";
-import z from "zod";
 
 /**
  * @swagger
@@ -32,17 +31,13 @@ import z from "zod";
  *         description: Internal server error
  */
 export const createMeetup = async (req: Request, res: Response) => {
-  const validatedData = createMeetupSchema.parse(req.body);
-
   try {
-    const newMeetup = await meetupRepository.create(validatedData);
+    const newMeetup = await meetupRepository.create(req.body);
 
     res.status(201).json(newMeetup);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      res.status(400).json({ error: error.errors[0].message });
-    } else {
-      res.status(500).json({ error: "Ошибка создания митапа" });
-    }
+    res.status(500).json({
+      error: `Error creating meetup: ${errorHeplers.getMessageFromUnkownError(error)}`,
+    });
   }
 };

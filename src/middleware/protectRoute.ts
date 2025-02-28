@@ -13,7 +13,8 @@ export const protectRoute = async (
     { session: false },
     (err: Error | null, user: User | false) => {
       if (err || !user) {
-        res.status(401).json({ error: "Not authenticated" });
+        const errorMessage = err === null ? "no token provided" : err.message;
+        res.status(401).json({ error: `Not authenticated: ${errorMessage}` });
         return;
       }
 

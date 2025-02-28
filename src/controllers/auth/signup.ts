@@ -1,28 +1,14 @@
 import { Request, Response } from "express";
-import { prisma } from "@db/prismaClient";
-import bcrypt from "bcrypt";
-import { generateAccessToken, generateRefreshToken } from "@utils/jwt";
+import { userService } from "@services/user";
+import { errorHeplers } from "@utils/errors/errorHelpers";
 
 export const signup = async (req: Request, res: Response) => {
-  const { fullName, email, password } = req.body;
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   try {
-    const user = await prisma.user.create({
-      data: {
-        fullName,
-        email,
-        password: hashedPassword,
-        roleId: 1,
-      },
-    });
-
-    const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateRefreshToken(user.id);
-
-    res.json({ accessToken, refreshToken });
+    const { statusCode, jsonResponse } = await userService.signup(req.body);
+    res.status(statusCode).json(jsonResponse);
   } catch (error) {
-    res.status(500).json({ error: "Ошибка регистрации пользователя" });
+    res.status(500).json({
+      error: `Error in signup controller: ${errorHeplers.getMessageFromUnkownError(error)}`,
+    });
   }
 };

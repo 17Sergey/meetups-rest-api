@@ -3,16 +3,26 @@ import jwt from "jsonwebtoken";
 import { getBearerToken } from "./getBearerToken";
 
 const ACCESS_TOKEN_SECRET =
-  process.env.ACCESS_TOKEN_SECRET || "your_secret_key";
+  process.env.ACCESS_TOKEN_SECRET || "access_secret_key";
 const REFRESH_TOKEN_SECRET =
-  process.env.REFRESH_TOKEN_SECRET || "your_refresh_secret_key";
+  process.env.REFRESH_TOKEN_SECRET || "refresh_secret_key";
 
 export const generateAccessToken = (userId: number) => {
-  return jwt.sign({ id: userId }, ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
+  return jwt.sign({ id: userId }, ACCESS_TOKEN_SECRET, { expiresIn: "1m" });
 };
 
 export const generateRefreshToken = (userId: number) => {
-  return jwt.sign({ id: userId }, REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
+  const refreshToken = jwt.sign({ id: userId }, REFRESH_TOKEN_SECRET, {
+    expiresIn: "2d",
+  });
+
+  const createdAt = new Date();
+
+  const ONE_HOUR = 1;
+  const expiresAt = new Date(createdAt);
+  expiresAt.setHours(createdAt.getHours() + ONE_HOUR);
+
+  return { refreshToken, createdAt, expiresAt };
 };
 
 export const authenticateToken = (
