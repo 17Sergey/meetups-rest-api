@@ -14,6 +14,14 @@ class UserRoleRepository {
     return item || null;
   }
 
+  async getByName(name: string) {
+    const item = await prismaClient.userRole.findUnique({
+      where: { name },
+    });
+
+    return item || null;
+  }
+
   async create(data: Omit<UserRole, "id">) {
     const newItem = await prismaClient.userRole.create({
       data,

@@ -1,11 +1,7 @@
-import { userRoleRepository } from "@repositories/UserRoleRepository";
 import { initializeUserRoles } from "./initializeUserRoles";
+import { initializeAdminUser } from "./initializeAdminUser";
 
 export const initializeDb = async () => {
-  const roles = await userRoleRepository.getAll();
-
-  if (roles.length < 2) {
-    await initializeUserRoles();
-    console.log(`[db]: User roles initialized`);
-  }
+  await initializeUserRoles();
+  await initializeAdminUser();
 };

@@ -2,11 +2,17 @@ import { userRoleRepository } from "@repositories/UserRoleRepository";
 import { USER_ROLES } from "@utils/constants";
 
 export const initializeUserRoles = async () => {
-  await userRoleRepository.create({
-    name: USER_ROLES.PARTICIPANT,
-  });
+  const roles = await userRoleRepository.getAll();
 
-  await userRoleRepository.create({
-    name: USER_ROLES.ORGANIZER,
-  });
+  if (roles.length < 2) {
+    await userRoleRepository.create({
+      name: USER_ROLES.PARTICIPANT,
+    });
+
+    await userRoleRepository.create({
+      name: USER_ROLES.ORGANIZER,
+    });
+
+    console.log(`[db]: User roles initialized`);
+  }
 };

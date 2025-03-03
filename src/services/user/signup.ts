@@ -1,11 +1,10 @@
 import prismaClient from "@db/prismaClient";
-import { refreshTokenRepository } from "@repositories/RefreshTokenRepository";
 import { userRepository } from "@repositories/UserRepository";
 import { refreshTokenService } from "@services/refreshToken";
 import { userRolesService } from "@services/UserRolesService";
 import { SignupSchema } from "@utils/dto/user";
 import { errorHeplers } from "@utils/errors/errorHelpers";
-import { generateAccessToken, generateRefreshToken } from "@utils/jwt";
+import { generateAccessToken } from "@utils/jwt";
 import { passwordHelpers } from "@utils/passwordHelpers";
 
 export const signup = async (
@@ -24,13 +23,22 @@ export const signup = async (
     const hashedPassword = await passwordHelpers.hashPassword(
       validatedData.password,
     );
-    const participantRole = await userRolesService.getParticipantRole();
+
+    const roleRecord = await userRolesService.getRoleRecord(validatedData.role);
+    if (!roleRecord) {
+      return {
+        statusCode: 400,
+        jsonResponse: {
+          error: "Role not found",
+        },
+      };
+    }
 
     const transactionLogic = async () => {
       const user = await userRepository.create({
         ...validatedData,
         password: hashedPassword,
-        roleId: participantRole.id,
+        roleId: roleRecord.id,
       });
 
       const accessToken = generateAccessToken(user.id);
