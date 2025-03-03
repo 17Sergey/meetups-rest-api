@@ -6,6 +6,7 @@ model User {
   roleId      Int
   role        UserRole           @relation(fields: [roleId], references: [id])
   refreshToken RefreshToken?
+  accessToken AccessToken?
 }
 
 model UserRole {
@@ -18,6 +19,15 @@ model RefreshToken {
   id          Int      @id @default(autoincrement())
   userId      Int      @unique
   refreshToken String
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model AccessToken {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @unique
+  accessToken String
   createdAt   DateTime @default(now())
   expiresAt   DateTime
   user        User     @relation(fields: [userId], references: [id])
