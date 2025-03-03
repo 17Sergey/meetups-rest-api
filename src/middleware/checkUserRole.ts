@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { userRolesService } from "@services/UserRolesService";
+import { userRolesService } from "@services/userRoles";
 import { Request, Response } from "express";
 
 export const checkUserRole = async (

@@ -1,7 +1,8 @@
 import prismaClient from "@db/prismaClient";
 import { userRepository } from "@repositories/UserRepository";
+import { accessTokenService } from "@services/accessToken";
 import { refreshTokenService } from "@services/refreshToken";
-import { userRolesService } from "@services/UserRolesService";
+import { userRolesService } from "@services/userRoles";
 import { SignupSchema } from "@utils/dto/user";
 import { errorHeplers } from "@utils/errors/errorHelpers";
 import { generateAccessToken } from "@utils/jwt";
@@ -41,7 +42,9 @@ export const signup = async (
         roleId: roleRecord.id,
       });
 
-      const accessToken = generateAccessToken(user.id);
+      const { accessToken } = await accessTokenService.generateTokenAndSaveToDb(
+        user.id,
+      );
       const { refreshToken } =
         await refreshTokenService.generateTokenAndSaveToDb(user.id);
 

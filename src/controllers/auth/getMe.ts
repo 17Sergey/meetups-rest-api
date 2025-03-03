@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { refreshTokenRepository } from "@repositories/RefreshTokenRepository";
-import { userService } from "@services/user";
+import { userService } from "@services/auth";
 import { errorHeplers } from "@utils/errors/errorHelpers";
 import { omitObjectKeys } from "@utils/omitObjectKeys";
 import { Request, Response } from "express";

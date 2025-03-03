@@ -14,4 +14,12 @@ export const refreshTokenService = {
 
     return { refreshToken };
   },
+
+  async getStoredOrCreateNewToken(userId: number) {
+    const refreshRecord = await refreshTokenRepository.getByUserId(userId);
+
+    if (refreshRecord) return refreshRecord;
+
+    return await this.generateTokenAndSaveToDb(userId);
+  },
 };

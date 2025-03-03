@@ -1,4 +1,4 @@
-import { USER_ROLES } from "@utils/constants";
+import { USER_ROLES } from "@services/userRoles/constants";
 import z from "zod";
 
 export const signupSchema = z.object({

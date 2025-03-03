@@ -1,6 +1,6 @@
 import { UserRole } from "@prisma/client";
 import { userRoleRepository } from "@repositories/UserRoleRepository";
-import { USER_ROLES } from "@utils/constants";
+import { USER_ROLES } from "@services/userRoles/constants";
 
 class UserRolesService {
   async getRoleRecord(roleName: string) {

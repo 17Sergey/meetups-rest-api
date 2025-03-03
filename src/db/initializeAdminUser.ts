@@ -1,6 +1,6 @@
 import { userRepository } from "@repositories/UserRepository";
-import { userService } from "@services/user";
-import { USER_ROLES } from "@utils/constants";
+import { userService } from "@services/auth";
+import { USER_ROLES } from "@services/userRoles/constants";
 import { SignupSchema } from "@utils/dto/user";
 
 export const initializeAdminUser = async () => {

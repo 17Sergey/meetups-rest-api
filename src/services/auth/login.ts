@@ -1,11 +1,10 @@
 import prismaClient from "@db/prismaClient";
 import { UserRole } from "@prisma/client";
-import { refreshTokenRepository } from "@repositories/RefreshTokenRepository";
 import { userRepository } from "@repositories/UserRepository";
 import { userRoleRepository } from "@repositories/UserRoleRepository";
+import { accessTokenService } from "@services/accessToken";
 import { refreshTokenService } from "@services/refreshToken";
 import { LoginSchema } from "@utils/dto/user";
-import { generateAccessToken } from "@utils/jwt";
 import { omitObjectKeys } from "@utils/omitObjectKeys";
 import { passwordHelpers } from "@utils/passwordHelpers";
 
@@ -37,19 +36,11 @@ export const login = async ({
   }
 
   const transactionLogic = async () => {
-    const accessToken = generateAccessToken(user.id);
+    const { accessToken } =
+      await accessTokenService.deleteOldAndGenerateNewToken(user.id);
 
-    let refreshToken = "";
-    let refreshRecord = await refreshTokenRepository.getByUserId(user.id);
-
-    if (!refreshRecord) {
-      const { refreshToken: newRefreshToken } =
-        await refreshTokenService.generateTokenAndSaveToDb(user.id);
-
-      refreshToken = newRefreshToken;
-    } else {
-      refreshToken = refreshRecord.refreshToken;
-    }
+    const { refreshToken } =
+      await refreshTokenService.getStoredOrCreateNewToken(user.id);
 
     const userToPass = omitObjectKeys(user, ["password", "roleId"]);
     const role = (await userRoleRepository.getById(user.roleId)) as UserRole;

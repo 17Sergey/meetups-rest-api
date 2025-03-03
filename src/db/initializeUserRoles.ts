@@ -1,5 +1,5 @@
 import { userRoleRepository } from "@repositories/UserRoleRepository";
-import { USER_ROLES } from "@utils/constants";
+import { USER_ROLES } from "@services/userRoles/constants";
 
 export const initializeUserRoles = async () => {
   const roles = await userRoleRepository.getAll();

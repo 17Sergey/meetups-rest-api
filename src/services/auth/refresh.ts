@@ -1,7 +1,7 @@
 import prismaClient from "@db/prismaClient";
 import { refreshTokenRepository } from "@repositories/RefreshTokenRepository";
+import { accessTokenService } from "@services/accessToken";
 import { errorHeplers } from "@utils/errors/errorHelpers";
-import { generateAccessToken } from "@utils/jwt";
 
 export const refresh = async (refreshToken: string): Promise<ServiceResult> => {
   const storedToken = await refreshTokenRepository.getByToken(refreshToken);
@@ -23,7 +23,10 @@ export const refresh = async (refreshToken: string): Promise<ServiceResult> => {
         };
       }
 
-      const newAccessToken = generateAccessToken(storedToken.userId);
+      const newAccessToken =
+        await accessTokenService.deleteOldAndGenerateNewToken(
+          storedToken.userId,
+        );
 
       return {
         statusCode: 200,
