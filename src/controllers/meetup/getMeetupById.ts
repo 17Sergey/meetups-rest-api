@@ -19,10 +19,44 @@ import { meetupRepository } from "src/repositories/MeetupRepository";
  *     responses:
  *       200:
  *         description: A meetup object
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 title:
+ *                   type: string
+ *                 description:
+ *                   type: string
+ *                 dateTime:
+ *                   type: string
+ *                   format: date-time
+ *                 location:
+ *                   type: string
+ *                 tags:
+ *                   type: array
+ *                   items:
+ *                     type: string
  *       404:
  *         description: Meetup not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
  *       500:
  *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
  */
 
 export const getMeetupById = async (req: Request, res: Response) => {

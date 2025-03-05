@@ -1,5 +1,5 @@
 import express from "express";
-import { protectRoute } from "../middleware/protectRoute.js";
+import { protectRoute } from "../middleware/protectRoute";
 import { getAllMeetups } from "@controllers/meetup/getAllMeetups";
 import { getMeetupById } from "@controllers/meetup/getMeetupById";
 import { createMeetup } from "@controllers/meetup/createMeetup";
@@ -8,13 +8,10 @@ import { deleteMeetup } from "@controllers/meetup/deleteMeetup";
 import { validateIdParameter } from "@middleware/validateIdParameter";
 import { numericIdSchema } from "@utils/dto/numericId";
 import { validateSchema } from "@middleware/validateSchema";
-import {
-  createMeetupSchema,
-  updateMeetupSchema,
-} from "@utils/dto/meetup/index.js";
+import { createMeetupSchema, updateMeetupSchema } from "@utils/dto/meetup";
 import { checkUserRole } from "@middleware/checkUserRole";
-import { validateQueryParams } from "@middleware/validateQueryParams.js";
-import { getAllQueryParamsSchema } from "@utils/dto/getAllQueryParams/index.js";
+import { validateQueryParams } from "@middleware/validateQueryParams";
+import { getAllQueryParamsSchema } from "@utils/dto/getAllQueryParams";
 
 const router = express.Router();
 

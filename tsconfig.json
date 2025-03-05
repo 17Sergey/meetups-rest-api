@@ -17,14 +17,16 @@
       "@services/*": ["./src/services/*"],
       "@routes/*": ["./src/routes/*"],
       "@types/*": ["./src/types/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@src/*": ["./src/*"]
     },
     "outDir": "./dist",
     "plugins": [{ "transform": "typescript-transform-paths" }]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "tsx": {
     "require": ["tsconfig-paths/register"]
   }
 }
+//  "**/*.test.ts"

@@ -6,7 +6,7 @@ import authRouter from "@routes/authRouter";
 import meetupRouter from "@routes/meetupRouter";
 
 import { authRoute, docsRoute, meetupsRoute } from "@routes/constants";
-import { swaggerUiConfig } from "src/configs/swagger";
+import { swaggerUiConfig } from "@configs/swagger";
 import { connectToDb } from "@db/connectToDb";
 
 /* Env */
@@ -47,3 +47,5 @@ app.listen(PORT, () => {
   console.log(`[server]: Server is running at http://localhost:${PORT}`);
   connectToDb();
 });
+
+export default app;
