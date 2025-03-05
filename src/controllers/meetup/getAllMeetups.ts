@@ -1,3 +1,4 @@
+import { meetupService } from "@services/meetup";
 import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
 import { meetupRepository } from "src/repositories/MeetupRepository";
@@ -17,31 +18,31 @@ import { meetupRepository } from "src/repositories/MeetupRepository";
 
 export const getAllMeetups = async (req: Request, res: Response) => {
   try {
-    // TODO: validate
-    const {
-      title,
+    const page = Number(req.query.page) || undefined;
+    const limit = Number(req.query.limit) || undefined;
+
+    const sortField = req.query.sortField
+      ? String(req.query.sortField)
+      : undefined;
+    const sortOrder = (req.query.sortOrder as SortOrder) || "asc";
+
+    const searchField = req.query.searchField
+      ? String(req.query.searchField)
+      : undefined;
+    const searchValue = req.query.searchValue
+      ? String(req.query.searchValue)
+      : undefined;
+
+    const { statusCode, jsonResponse } = await meetupService.getAll({
+      page,
+      limit,
       sortField,
       sortOrder,
-      page: queryPage,
-      queryLimit,
-    } = req.query;
+      searchField,
+      searchValue,
+    });
 
-    const filters = {
-      title: title || undefined,
-    };
-
-    const sort = {
-      field: sortField,
-      order: sortOrder || "asc",
-    };
-
-    const page = Number(queryPage) || 1;
-    const limit = Number(queryLimit) || 10;
-
-    const meetups = await meetupRepository.getAll(filters, sort, page, limit);
-
-    const totalPages = Math.ceil(meetups.length / limit);
-    res.json({ meetups, totalPages });
+    res.status(statusCode).json(jsonResponse);
   } catch (error) {
     const errorMessage = errorHeplers.getMessageFromUnkownError(error);
     res

@@ -1,6 +1,6 @@
+import { meetupService } from "@services/meetup";
 import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
-import { meetupRepository } from "src/repositories/MeetupRepository";
 
 /**
  * @swagger
@@ -32,9 +32,9 @@ import { meetupRepository } from "src/repositories/MeetupRepository";
  */
 export const createMeetup = async (req: Request, res: Response) => {
   try {
-    const newMeetup = await meetupRepository.create(req.body);
+    const { statusCode, jsonResponse } = await meetupService.create(req.body);
 
-    res.status(201).json(newMeetup);
+    res.status(statusCode).json(jsonResponse);
   } catch (error) {
     res.status(500).json({
       error: `Error creating meetup: ${errorHeplers.getMessageFromUnkownError(error)}`,

@@ -1,5 +1,6 @@
 import prismaClient from "@db/prismaClient";
 import { meetupRepository } from "@repositories/MeetupRepository";
+import { meetupService } from "@services/meetup";
 import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
 
@@ -41,12 +42,13 @@ import { Request, Response } from "express";
  *         description: Internal server error
  */
 export const updateMeetup = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const id = Number(req.params.id);
   const data = req.body;
 
   try {
-    const updatedMeetup = await meetupRepository.update(Number(id), data);
-    res.json(updatedMeetup);
+    const { statusCode, jsonResponse } = await meetupService.update(id, data);
+
+    res.status(statusCode).json(jsonResponse);
   } catch (error) {
     res.status(500).json({
       error: `Error updating meetup: ${errorHeplers.getMessageFromUnkownError(error)}`,

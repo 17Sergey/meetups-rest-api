@@ -7,14 +7,14 @@ export const REFRESH_TOKEN_SECRET =
 
 export const generateAccessToken = (userId: number) => {
   const accessToken = jwt.sign({ id: userId }, ACCESS_TOKEN_SECRET, {
-    expiresIn: "1m",
+    expiresIn: "5m",
   });
 
   const createdAt = new Date();
   const expiresAt = new Date();
 
-  const ONE_MINUTE = 1;
-  expiresAt.setMinutes(expiresAt.getMinutes() + ONE_MINUTE);
+  const MINUTES = 5;
+  expiresAt.setMinutes(expiresAt.getMinutes() + MINUTES);
 
   return { accessToken, createdAt, expiresAt };
 };

@@ -5,7 +5,6 @@ import { refreshTokenService } from "@services/refreshToken";
 import { userRolesService } from "@services/userRoles";
 import { SignupSchema } from "@utils/dto/user";
 import { errorHeplers } from "@utils/errors/errorHelpers";
-import { generateAccessToken } from "@utils/jwt";
 import { passwordHelpers } from "@utils/passwordHelpers";
 
 export const signup = async (

@@ -15,13 +15,9 @@ class AccessTokenRepository {
   }
 
   async getByUserId(userId: number) {
-    console.log(userId);
-
     const item = await prismaClient.accessToken.findUnique({
       where: { userId },
     });
-
-    console.log(item);
 
     return item || null;
   }

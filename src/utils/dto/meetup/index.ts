@@ -18,6 +18,8 @@ export const createMeetupSchema = z.object({
   location: z
     .string({ message: "Location is required." })
     .max(200, { message: "Location must be at most 200 characters long." }),
+
+  tags: z.array(z.string()).optional(),
 });
 
 export const updateMeetupSchema = z.object({
@@ -45,6 +47,8 @@ export const updateMeetupSchema = z.object({
     .max(200, { message: "Location must be at most 200 characters long." })
     .nonempty({ message: "Location cannot be an empty string." })
     .optional(),
+
+  tags: z.array(z.string()).optional(),
 });
 
 export type CreateMeetupSchema = z.infer<typeof createMeetupSchema>;

@@ -13,6 +13,8 @@ import {
   updateMeetupSchema,
 } from "@utils/dto/meetup/index.js";
 import { checkUserRole } from "@middleware/checkUserRole";
+import { validateQueryParams } from "@middleware/validateQueryParams.js";
+import { getAllQueryParamsSchema } from "@utils/dto/getAllQueryParams/index.js";
 
 const router = express.Router();
 
@@ -23,7 +25,7 @@ const router = express.Router();
  *   description: API for managing meetups
  */
 
-router.get("/", getAllMeetups);
+router.get("/", validateQueryParams(getAllQueryParamsSchema), getAllMeetups);
 router.get("/:id", validateIdParameter(numericIdSchema), getMeetupById);
 
 router.post(

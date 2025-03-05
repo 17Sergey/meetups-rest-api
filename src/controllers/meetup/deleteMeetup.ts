@@ -1,3 +1,5 @@
+import { meetupService } from "@services/meetup";
+import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
 import { meetupRepository } from "src/repositories/MeetupRepository";
 
@@ -26,21 +28,12 @@ export const deleteMeetup = async (req: Request, res: Response) => {
   const id = req.id as number;
 
   try {
-    const meetup = await meetupRepository.getById(id);
+    const { statusCode, jsonResponse } = await meetupService.deleteMeetup(id);
 
-    if (!meetup) {
-      res.status(404).json({
-        message: "Meetup not found",
-      });
-      return;
-    }
-
-    await meetupRepository.delete(id);
-
-    res.status(200).json({
-      message: "Meetup deleted successfully",
-    });
+    res.status(statusCode).json(jsonResponse);
   } catch (error) {
-    res.status(500).json({ error: "Ошибка удаления митапа" });
+    res.status(500).json({
+      error: `Error in deleteMeetupController: ${errorHeplers.getMessageFromUnkownError(error)}`,
+    });
   }
 };
