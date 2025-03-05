@@ -17,8 +17,8 @@ export const update = async (
 
     const transactionLogic = async () => {
       const updatedMeetup = await meetupRepository.update(meetupId, meetupData);
-      const oldTags = updatedMeetup.tags.map((tag) => tag.tag);
 
+      const oldTags = updatedMeetup.tags.map((tag) => tag.tag);
       await meetupTagsService.updateTags(meetupId, oldTags, newTagNames);
 
       const { statusCode, jsonResponse } =
