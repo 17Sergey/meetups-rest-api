@@ -1,10 +1,38 @@
 import { User } from "@prisma/client";
-import { refreshTokenRepository } from "@repositories/RefreshTokenRepository";
 import { userService } from "@services/auth";
 import { errorHeplers } from "@utils/errors/errorHelpers";
-import { omitObjectKeys } from "@utils/omitObjectKeys";
 import { Request, Response } from "express";
 
+/**
+ * @swagger
+ * /me:
+ *   get:
+ *     summary: Get current user info
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User info
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 fullName:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 role:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
+ *       401:
+ *         description: No token provided
+ *       403:
+ *         description: Invalid token
+ *
+ **/
 export const getMe = async (req: Request, res: Response) => {
   try {
     const requestUser = req.user as User;
