@@ -30,7 +30,7 @@ export const refresh = async (refreshToken: string): Promise<ServiceResult> => {
 
       return {
         statusCode: 200,
-        jsonResponse: { accessToken: newAccessToken },
+        jsonResponse: { accessToken: newAccessToken.accessToken },
       };
     };
 
