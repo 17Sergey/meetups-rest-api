@@ -5,7 +5,9 @@ import path from "path";
 
 const API_PATHS = [
   path.join(__dirname, "..", "..", "controllers", "*", "*.ts"),
+  path.join(__dirname, "..", "..", "controllers", "*", "*.js"),
   path.join(__dirname, "..", "..", "routes", "*.ts"),
+  path.join(__dirname, "..", "..", "routes", "*.js"),
 ];
 
 const swaggerOptions = {
