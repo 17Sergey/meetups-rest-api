@@ -1,4 +1,5 @@
 import { meetupRepository } from "@repositories/MeetupRepository";
+
 import { errorHeplers } from "@utils/errors/errorHelpers";
 
 export const getById = async (meetupId: number): Promise<ServiceResult> => {

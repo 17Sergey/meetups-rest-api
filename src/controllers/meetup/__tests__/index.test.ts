@@ -1,6 +1,8 @@
 import request from "supertest";
-import app from "@src/server";
+
 import prismaClient from "@db/prismaClient";
+
+import app from "@src/server";
 
 describe("Meetup Routes", () => {
   let userId = 0;

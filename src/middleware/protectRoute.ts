@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { getBearerToken } from "@utils/jwt/getBearerToken";
 import jwt from "jsonwebtoken";
+
 import { userRepository } from "@repositories/UserRepository";
+import { accessTokenRepository } from "@repositories/AccessTokenRepository";
+
+import { getBearerToken } from "@utils/jwt/getBearerToken";
 import { errorHeplers } from "@utils/errors/errorHelpers";
 import { ACCESS_TOKEN_SECRET } from "@utils/jwt";
-import { accessTokenService } from "@services/accessToken";
-import { accessTokenRepository } from "@repositories/AccessTokenRepository";
 
 export const protectRoute = async (
   req: Request,

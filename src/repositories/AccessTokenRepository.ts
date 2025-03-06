@@ -1,5 +1,6 @@
-import prismaClient from "@db/prismaClient";
 import { AccessToken } from "@prisma/client";
+
+import prismaClient from "@db/prismaClient";
 
 class AccessTokenRepository {
   async getAll() {

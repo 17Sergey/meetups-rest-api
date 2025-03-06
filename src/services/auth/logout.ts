@@ -1,5 +1,6 @@
 import { accessTokenRepository } from "@repositories/AccessTokenRepository";
 import { refreshTokenRepository } from "@repositories/RefreshTokenRepository";
+
 import { errorHeplers } from "@utils/errors/errorHelpers";
 
 export const logout = async (userId: number): Promise<ServiceResult> => {

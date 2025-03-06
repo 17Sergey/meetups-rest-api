@@ -1,5 +1,6 @@
-import prismaClient from "@db/prismaClient";
 import { MeetupTag } from "@prisma/client";
+
+import prismaClient from "@db/prismaClient";
 
 class MeetupTagRepository {
   async getAllByMeetupId(meetupId: number) {

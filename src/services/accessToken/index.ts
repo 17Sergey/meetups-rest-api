@@ -1,9 +1,8 @@
 import { User } from "@prisma/client";
+
 import { accessTokenRepository } from "@repositories/AccessTokenRepository";
-import { userRepository } from "@repositories/UserRepository";
-import { errorHeplers } from "@utils/errors/errorHelpers";
-import { ACCESS_TOKEN_SECRET, generateAccessToken } from "@utils/jwt";
-import jwt from "jsonwebtoken";
+
+import { generateAccessToken } from "@utils/jwt";
 
 export type VerifyTokenResponse = {
   isVerified: boolean;

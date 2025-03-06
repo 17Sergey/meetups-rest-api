@@ -1,12 +1,15 @@
 import express from "express";
-import { protectRoute } from "@middleware/protectRoute";
+
 import { getMe } from "@controllers/auth/getMe";
 import { signup } from "@controllers/auth/signup";
 import { login } from "@controllers/auth/login";
 import { logout } from "@controllers/auth/logout";
-import { validateSchema } from "@middleware/validateSchema";
-import { loginSchema, refreshSchema, signupSchema } from "@utils/dto/user";
 import { refresh } from "@controllers/auth/refresh";
+
+import { validateSchema } from "@middleware/validateSchema";
+import { protectRoute } from "@middleware/protectRoute";
+
+import { loginSchema, refreshSchema, signupSchema } from "@utils/dto/user";
 
 export const AUTH_ROUTES = {
   ME: "/me",

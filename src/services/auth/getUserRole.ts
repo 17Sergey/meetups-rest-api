@@ -1,4 +1,5 @@
 import { User } from "@prisma/client";
+
 import { userRoleRepository } from "@repositories/UserRoleRepository";
 
 export const getUserRole = async (user: User) => {

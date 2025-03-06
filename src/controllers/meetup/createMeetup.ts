@@ -1,6 +1,8 @@
-import { meetupService } from "@services/meetup";
-import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
+
+import { meetupService } from "@services/meetup";
+
+import { errorHeplers } from "@utils/errors/errorHelpers";
 
 /**
  * @swagger

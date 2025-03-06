@@ -1,7 +1,9 @@
 import { User } from "@prisma/client";
-import { userService } from "@services/auth";
-import { errorHeplers } from "@utils/errors/errorHelpers";
 import { Request, Response } from "express";
+
+import { userService } from "@services/auth";
+
+import { errorHeplers } from "@utils/errors/errorHelpers";
 
 /**
  * @swagger

@@ -1,5 +1,7 @@
 import request from "supertest";
+
 import prismaClient from "@db/prismaClient";
+
 import app from "@src/server";
 
 describe("GET /meetups/:id", () => {

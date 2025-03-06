@@ -1,5 +1,7 @@
 import { RefreshToken } from "@prisma/client";
+
 import { refreshTokenRepository } from "@repositories/RefreshTokenRepository";
+
 import { generateRefreshToken } from "@utils/jwt";
 
 export const refreshTokenService = {

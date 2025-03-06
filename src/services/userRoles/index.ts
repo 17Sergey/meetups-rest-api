@@ -1,5 +1,7 @@
 import { UserRole } from "@prisma/client";
+
 import { userRoleRepository } from "@repositories/UserRoleRepository";
+
 import { USER_ROLES } from "@services/userRoles/constants";
 
 class UserRolesService {

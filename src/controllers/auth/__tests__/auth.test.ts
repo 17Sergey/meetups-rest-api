@@ -1,8 +1,11 @@
 import request from "supertest";
-import app from "@src/server";
-import prismaClient from "@db/prismaClient";
 import { hash } from "bcrypt";
+
+import prismaClient from "@db/prismaClient";
+
 import { ACCESS_TOKEN_SECRET } from "@utils/jwt";
+
+import app from "@src/server";
 
 describe("Auth Routes", () => {
   let userId = 0;
@@ -10,6 +13,7 @@ describe("Auth Routes", () => {
 
   beforeAll(async () => {
     const hashedPassword = await hash("testPassword", 10);
+    userR;
     const user = await prismaClient.user.create({
       data: {
         fullName: "Test User",

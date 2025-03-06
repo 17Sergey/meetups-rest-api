@@ -1,4 +1,5 @@
 import prismaClient from "@db/prismaClient";
+
 import { SignupSchema } from "@utils/dto/user";
 
 type CreateParams = SignupSchema & {

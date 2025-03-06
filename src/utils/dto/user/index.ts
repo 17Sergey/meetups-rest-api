@@ -1,5 +1,6 @@
-import { USER_ROLES } from "@services/userRoles/constants";
 import z from "zod";
+
+import { USER_ROLES } from "@services/userRoles/constants";
 
 export const signupSchema = z.object({
   fullName: z

@@ -1,5 +1,6 @@
-import prismaClient from "@db/prismaClient";
 import { Tag } from "@prisma/client";
+
+import prismaClient from "@db/prismaClient";
 
 class TagRepository {
   async getAll() {

@@ -1,6 +1,8 @@
 import { Tag } from "@prisma/client";
+
 import { meetupTagRepository } from "@repositories/MeetupTagRepository";
 import { tagRepository } from "@repositories/TagRepository";
+
 import { tagsService } from "@services/tag";
 
 type AddMeetupTags = {

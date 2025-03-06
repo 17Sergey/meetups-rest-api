@@ -1,9 +1,13 @@
 import prismaClient from "@db/prismaClient";
+
 import { meetupRepository } from "@repositories/MeetupRepository";
+
 import { meetupTagsService } from "@services/meetupTags";
+
 import { UpdateMeetupSchema } from "@utils/dto/meetup";
 import { errorHeplers } from "@utils/errors/errorHelpers";
 import { omitObjectKeys } from "@utils/omitObjectKeys";
+
 import { meetupService } from ".";
 
 export const update = async (

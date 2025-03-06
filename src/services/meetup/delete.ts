@@ -1,5 +1,7 @@
 import prismaClient from "@db/prismaClient";
+
 import { meetupRepository } from "@repositories/MeetupRepository";
+
 import { meetupTagsService } from "@services/meetupTags";
 import { tagsService } from "@services/tag";
 

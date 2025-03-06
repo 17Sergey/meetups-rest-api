@@ -1,5 +1,6 @@
-import prismaClient from "@db/prismaClient";
 import { RefreshToken } from "@prisma/client";
+
+import prismaClient from "@db/prismaClient";
 
 class RefreshTokenRepository {
   async getAll() {

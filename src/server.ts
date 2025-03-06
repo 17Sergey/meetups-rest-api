@@ -2,12 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
+import { swaggerUiConfig } from "@configs/swagger";
+
+import { connectToDb } from "@db/connectToDb";
+
 import authRouter from "@routes/authRouter";
 import meetupRouter from "@routes/meetupRouter";
-
 import { authRoute, docsRoute, meetupsRoute } from "@routes/constants";
-import { swaggerUiConfig } from "@configs/swagger";
-import { connectToDb } from "@db/connectToDb";
 
 /* Env */
 dotenv.config();

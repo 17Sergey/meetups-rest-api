@@ -1,9 +1,11 @@
+import prismaClient from "@db/prismaClient";
+
+import { GetAllMeetups } from "@services/meetup/getAll";
+
 import {
   CreateMeetupSchema,
   UpdateMeetupSchema,
 } from "@utils/dto/meetup/index";
-import prismaClient from "@db/prismaClient";
-import { GetAllMeetups } from "@services/meetup/getAll";
 
 type GetCount = {
   searchField?: string;

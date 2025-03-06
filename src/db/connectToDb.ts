@@ -1,4 +1,4 @@
-import { initialize } from "passport";
+
 import prismaClient from "./prismaClient";
 import { initializeDb } from "./initializeDb";
 
