@@ -7,8 +7,6 @@ const API_PATHS = [
   path.join(__dirname, "..", "..", "controllers", "*", "*.ts"),
   path.join(__dirname, "..", "..", "routes", "*.ts"),
 ];
-const PORT = process.env.PORT || 5000;
-const HOST = process.env.HOST || "localhost";
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -18,11 +16,6 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "API documentation for Meetup application",
     },
-    servers: [
-      {
-        url: `http://${HOST}:${PORT}`,
-      },
-    ],
   },
   apis: API_PATHS,
 };

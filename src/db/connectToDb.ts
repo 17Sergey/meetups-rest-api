@@ -1,6 +1,5 @@
-
 import prismaClient from "./prismaClient";
-import { initializeDb } from "./initializeDb";
+import { initializeDb } from "./init/initializeDb";
 
 export const connectToDb = async () => {
   try {

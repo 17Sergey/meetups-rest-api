@@ -6,36 +6,73 @@ import { errorHeplers } from "@utils/errors/errorHelpers";
 
 /**
  * @swagger
- * /login:
- *   post:
- *     summary: Login a user
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
+ * paths:
+ *   /v1/auth/login:
+ *     post:
+ *       summary: 'User login'
+ *       description: 'Authenticates a user and returns tokens.'
+ *       tags:
+ *         - Authentication
+ *       parameters:
+ *         - in: body
+ *           name: body
+ *           required: true
  *           schema:
  *             type: object
  *             properties:
  *               email:
  *                 type: string
- *                 format: email
  *               password:
  *                 type: string
- *     responses:
- *       200:
- *         description: Login successful
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 accessToken:
- *                   type: string
- *       401:
- *         description: Invalid credentials
- *
- **/
+ *           examples:
+ *             application/json:
+ *               {
+ *                 "email": "jane.doe@example.com",
+ *                 "password": "Password123!"
+ *               }
+ *       responses:
+ *         200:
+ *           description: 'User successfully logged in.'
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   email:
+ *                     type: string
+ *                   role:
+ *                     type: string
+ *               accessToken:
+ *                 type: string
+ *               refreshToken:
+ *                 type: string
+ *           examples:
+ *             application/json:
+ *               {
+ *                 "user": {
+ *                   "id": 1,
+ *                   "email": "jane.doe@example.com",
+ *                   "role": "participant"
+ *                 },
+ *                 "accessToken": "some_access_token",
+ *                 "refreshToken": "some_refresh_token"
+ *               }
+ *         403:
+ *           description: 'Invalid credentials.'
+ *           schema:
+ *             type: object
+ *             properties:
+ *               error:
+ *                 type: string
+ *           examples:
+ *             application/json:
+ *               {
+ *                 "error": "Invalid credentials"
+ *               }
+ */
 
 export const login = async (req: Request, res: Response) => {
   try {

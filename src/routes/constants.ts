@@ -6,7 +6,7 @@ export const ROUTES = {
   VERSIONS,
   AUTH: "/auth",
   MEETUPS: "/meetups",
-  API_DOCS: "/api-docs",
+  API_DOCS: "/docs",
 };
 
 export const routesHelpers = {

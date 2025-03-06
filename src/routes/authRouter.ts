@@ -18,7 +18,6 @@ export const AUTH_ROUTES = {
   LOGIN: "/login",
   LOGOUT: "/logout",
 };
-
 const router = express.Router();
 
 router.get(AUTH_ROUTES.ME, protectRoute, getMe);

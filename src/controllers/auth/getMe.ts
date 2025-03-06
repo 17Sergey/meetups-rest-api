@@ -7,34 +7,65 @@ import { errorHeplers } from "@utils/errors/errorHelpers";
 
 /**
  * @swagger
- * /me:
- *   get:
- *     summary: Get current user info
- *     tags: [Auth]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: User info
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 fullName:
- *                   type: string
- *                 email:
- *                   type: string
- *                 role:
- *                   type: string
- *                 refreshToken:
- *                   type: string
- *       401:
- *         description: No token provided
- *       403:
- *         description: Invalid token
- *
- **/
+ * swagger: '2.0'
+ * info:
+ *   description: 'API for user authentication.'
+ *   version: '1.0.0'
+ *   title: 'Authentication API'
+ * paths:
+ *   /v1/auth/me:
+ *     get:
+ *       summary: 'Get current user'
+ *       description: 'Retrieves the current authenticated user.'
+ *       tags:
+ *         - Authentication
+ *       security:
+ *         - Bearer: []
+ *       parameters:
+ *         - in: header
+ *           name: Authorization
+ *           required: true
+ *           type: string
+ *           description: 'JWT token for authorization. Format: Bearer <token>'
+ *       responses:
+ *         200:
+ *           description: 'User successfully retrieved.'
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: integer
+ *               fullName:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               role:
+ *                 type: string
+ *               refreshToken:
+ *                 type: string
+ *           examples:
+ *             application/json:
+ *               {
+ *                 "id": 1,
+ *                 "fullName": "John Doe",
+ *                 "email": "john.doe@example.com",
+ *                 "role": "participant",
+ *                 "refreshToken": "some_refresh_token"
+ *               }
+ *         401:
+ *           description: 'Unauthorized.'
+ *           schema:
+ *             type: object
+ *             properties:
+ *               error:
+ *                 type: string
+ *           examples:
+ *             application/json:
+ *               {
+ *                 "error": "Unauthorized"
+ *               }
+ */
+
 export const getMe = async (req: Request, res: Response) => {
   try {
     const requestUser = req.user as User;
