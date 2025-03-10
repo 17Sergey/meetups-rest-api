@@ -8,8 +8,10 @@ import { refresh } from "@controllers/auth/refresh";
 
 import { validateSchema } from "@middleware/validateSchema";
 import { protectRoute } from "@middleware/protectRoute";
+import { validateCookieItem } from "@middleware/validateCookieItem";
 
-import { loginSchema, refreshSchema, signupSchema } from "@utils/dto/user";
+import { loginSchema, signupSchema } from "@utils/dto/user";
+import { COOKIE_KEYS } from "@utils/jwt";
 
 export const AUTH_ROUTES = {
   ME: "/me",
@@ -22,7 +24,7 @@ const router = express.Router();
 
 router.get(AUTH_ROUTES.ME, protectRoute, getMe);
 
-router.post(AUTH_ROUTES.REFRESH, validateSchema(refreshSchema), refresh);
+router.post(AUTH_ROUTES.REFRESH, validateCookieItem(COOKIE_KEYS.JWT), refresh);
 
 router.post(AUTH_ROUTES.SIGNUP, validateSchema(signupSchema), signup);
 

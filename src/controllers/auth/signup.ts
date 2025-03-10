@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { userService } from "@services/auth";
 
 import { errorHeplers } from "@utils/errors/errorHelpers";
+import { setJwtCookie } from "@utils/jwt";
 
 /**
  * @swagger
@@ -81,6 +82,11 @@ import { errorHeplers } from "@utils/errors/errorHelpers";
 export const signup = async (req: Request, res: Response) => {
   try {
     const { statusCode, jsonResponse } = await userService.signup(req.body);
+
+    if (jsonResponse.refreshToken) {
+      setJwtCookie(res, jsonResponse.refreshToken as string);
+    }
+
     res.status(statusCode).json(jsonResponse);
   } catch (error) {
     res.status(500).json({

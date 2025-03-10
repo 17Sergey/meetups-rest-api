@@ -40,12 +40,6 @@ export const meetupTagsService = {
       (newTagName) => !oldTagNames.includes(newTagName),
     );
 
-    console.log("leftOldTags");
-    console.log(leftOldTags);
-
-    console.log("newTagNames");
-    console.log(newTagNames);
-
     /* delete link for old and check for unused */
     if (leftOldTags.length > 0) {
       const promises = leftOldTags.map((leftOldTag) =>

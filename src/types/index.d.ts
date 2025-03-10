@@ -1,6 +1,6 @@
 type ServiceResult = {
   statusCode: number;
-  jsonResponse: object;
+  jsonResponse: Record<string, any>;
 };
 
 type SortOrder = "asc" | "desc";

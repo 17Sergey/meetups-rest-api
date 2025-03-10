@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { userService } from "@services/auth";
 
 import { errorHeplers } from "@utils/errors/errorHelpers";
+import { destroyJwtCookie } from "@utils/jwt";
 
 /**
  * @swagger
@@ -53,6 +54,10 @@ export const logout = async (req: Request, res: Response) => {
   try {
     const { id } = req.user as User;
     const { statusCode, jsonResponse } = await userService.logout(id);
+
+    if (statusCode >= 200 && statusCode <= 299) {
+      destroyJwtCookie(res);
+    }
 
     res.status(statusCode).json(jsonResponse);
   } catch (error) {
