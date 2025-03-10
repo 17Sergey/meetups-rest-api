@@ -5,6 +5,20 @@ import prismaClient from "@db/prismaClient";
 import app from "@src/server";
 
 describe("Meetup Routes", () => {
+  beforeAll(async () => {
+    const signupResponse = await request(app).post("/signup").send({
+      fullName: "Test user",
+      email: "testuser@gmail.com",
+      password: "123456aA!",
+      role: "organizer",
+    });
+
+    expect(signupResponse.status).toBe(201);
+
+    userId = signupResponse.body.id;
+    accessToken = signupResponse.body.accessToken;
+    refreshToken = signupResponse.body.refreshToken;
+  });
   let userId = 0;
   let accessToken = "";
   let refreshToken = "";

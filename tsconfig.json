@@ -24,9 +24,8 @@
     "plugins": [{ "transform": "typescript-transform-paths" }]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "tsx": {
     "require": ["tsconfig-paths/register"]
   }
 }
-//  "**/*.test.ts"

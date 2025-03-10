@@ -13,7 +13,6 @@ describe("Auth Routes", () => {
 
   beforeAll(async () => {
     const hashedPassword = await hash("testPassword", 10);
-    userR;
     const user = await prismaClient.user.create({
       data: {
         fullName: "Test User",
