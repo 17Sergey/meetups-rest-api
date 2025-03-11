@@ -3,4 +3,7 @@ type ServiceResult = {
   jsonResponse: Record<string, any>;
 };
 
-type SortOrder = "asc" | "desc";
+enum SORT_ORDER {
+  ASC = "asc",
+  DESC = "desc",
+}

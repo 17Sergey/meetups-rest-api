@@ -6,7 +6,7 @@ export type GetAllMeetups = {
   page?: number;
   limit?: number;
   sortField?: string;
-  sortOrder?: SortOrder;
+  sortOrder?: SORT_ORDER;
   searchField?: string;
   searchValue?: string;
 };

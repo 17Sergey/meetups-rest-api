@@ -134,7 +134,7 @@ export const getAllMeetups = async (req: Request, res: Response) => {
     const sortField = req.query.sortField
       ? String(req.query.sortField)
       : undefined;
-    const sortOrder = (req.query.sortOrder as SortOrder) || "asc";
+    const sortOrder = (req.query.sortOrder as SORT_ORDER) || SORT_ORDER.ASC;
 
     const searchField = req.query.searchField
       ? String(req.query.searchField)
