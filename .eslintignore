@@ -1,8 +1,5 @@
 node_modules
-
 dist
-
-.env
-.env.test
-
 .history
+coverage
+*.test.ts

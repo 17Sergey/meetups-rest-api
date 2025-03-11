@@ -1,0 +1,104 @@
+{
+  "env": {
+    "es2021": true,
+    "jest": true,
+    "node": true,
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+  },
+  "plugins": ["@typescript-eslint", "import", "unused-imports"],
+  "rules": {
+    "eol-last": ["warn", "always"],
+    "prefer-const": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-multiple-empty-lines": "warn",
+    "no-unused-vars": "off",
+    "import/no-anonymous-default-export": "off",
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "@controllers/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@configs/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@db/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@middleware/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@repositories/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@services/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@routes/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@types/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@utils/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@src/**",
+            "group": "internal",
+            "position": "after",
+          },
+        ],
+        "pathGroupsExcludedImportTypes": ["internal"],
+        "groups": [
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type",
+        ],
+      },
+    ],
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+      },
+    ],
+  },
+}
+
